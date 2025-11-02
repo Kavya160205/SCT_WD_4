@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow—To-Do</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-anim" aria-hidden="true"></div>
+
+  <main class="app" role="main" aria-live="polite">
+    <!-- Left Section -->
+    <section class="card" aria-label="TaskFlow main panel">
+      <header class="site">
+        <div class="title">
+          <h1>TaskFlow</h1>
+          <p class="muted small">A To-Do app</p>
+        </div>
+        <div class="clock" id="clock" aria-label="Clock showing current time">--:--</div>
+      </header>
+
+      <!-- Task Input Form -->
+      <form id="taskForm" class="task-form" autocomplete="off" novalidate>
+        <div class="input">
+          <label for="title" class="visually-hidden">Task title</label>
+          <input 
+            id="title" 
+            type="text" 
+            placeholder="Task title (e.g., Study OS)" 
+            maxlength="80" 
+            required 
+          >
+
+          <label for="desc" class="visually-hidden">Task description</label>
+          <textarea 
+            id="desc" 
+            placeholder="Short description (optional)"
+            rows="2"
+          ></textarea>
+        </div>
+
+        <div class="date">
+          <label for="date" class="small muted">Due Date:</label>
+          <input id="date" type="date">
+
+          <label for="time" class="small muted">Time:</label>
+          <input id="time" type="time">
+        </div>
+
+        <div class="actions">
+          <button id="addBtn" type="button" class="btn" aria-label="Add a new task">Add Task</button>
+          <button id="clearAll" type="button" class="btn ghost" title="Clear completed tasks" aria-label="Clear completed tasks">Clear Completed</button>
+        </div>
+      </form>
+
+      <!-- Filters -->
+<section class="filters" aria-label="Task filters">
+  <div class="filter-group">
+    <button class="active" data-filter="all" type="button" aria-pressed="true">All</button>
+    <button data-filter="pending" type="button" aria-pressed="false">Pending</button>
+    <button data-filter="completed" type="button" aria-pressed="false">Completed</button>
+  </div>
+  <p class="muted small total-count">
+    Total: <span id="totalCount">0</span>
+  </p>
+</section>
+
+
+      <!-- Task List -->
+      <div class="tasks" id="taskList" aria-live="polite" aria-atomic="true">
+        <!-- Tasks will be dynamically injected here -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyMessage" class="empty" hidden>
+        <div class="empty-message">
+  <p class="muted">No tasks yet —</p>
+  <p class="quote" id="quote">Stay focused & start small ✨</p>
+</div>
+
+      </div>
+    </section>
+
+    <!-- Right Sidebar -->
+    <aside class="side" aria-label="Task statistics and tips">
+      <div class="card stat">
+        <div>
+          <p class="muted small">Pending</p>
+          <strong id="pendingCount">0</strong>
+        </div>
+        <div>
+          <p class="muted small">Completed</p>
+          <strong id="completedCount">0</strong>
+        </div>
+      </div>
+
+      <div class="card tips-card">
+  <h4 class="tips-title">Tips</h4>
+  <ul class="tips-list muted small">
+    <li>Set due time for better reminders.</li>
+    <li>Complete small tasks first for momentum.</li>
+    <li>Edit tasks by clicking the ✏️ icon.</li>
+  </ul>
+</div>
+
+
+      <div class="card">
+  <p class="muted small">Saved locally</p>
+  <div class="pill" id="lastSaved">Never</div>
+</div>
+
+    </aside>
+  </main>
+
+  <!-- Edit Modal (hidden by default) -->
+  <div id="modalRoot" hidden></div>
+
+  <!-- JS -->
+  <script src="script.js" defer></script>
+</body>
+</html>
